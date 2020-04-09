@@ -28,6 +28,27 @@ function RDP_add_new_fields() {
             'schema'          => null,                 // Creates schema for the field.
         ) 
     );
+    register_rest_field(
+        'post',
+        'prevPostID',
+        array(
+            'get_callback' => 'RDP_get_prev_postID'
+        )
+        );
+    register_rest_field(
+        'post',
+        'prevPostTitle',
+        array(
+            'get_callback' => 'RDP_get_prev_post_title'
+        )
+        );
+    register_rest_field(
+        'post',
+        'prevPostLink',
+        array(
+            'get_callback' => 'RDP_get_prev_post_link'
+        )
+        );
 }
 
 /**
@@ -46,4 +67,22 @@ function RDP_get_category_links() {
         $output = trim( $output, $separator );
     }
     return $output;
+}
+
+function RDP_get_prev_postID() {
+    $postID = get_previous_post()->ID;
+
+    return $postID;
+}
+
+function RDP_get_prev_post_title() {
+    $previousPost = get_previous_post();
+
+    return get_the_title($previousPost->ID);
+}
+
+function RDP_get_prev_post_link() {
+    $previousPost = get_previous_post();
+
+    return get_permalink($previousPost->ID);
 }

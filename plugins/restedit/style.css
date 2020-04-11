@@ -1,0 +1,16 @@
+.entry-title {
+    padding: 1.6rem 0;
+}
+
+#new-title {
+    font-size: 6.4rem;
+    font-weight: 800;
+    letter-spacing: -0.0415625em;
+    line-height: 1.138888889;
+    text-align: center;
+}
+
+.edit-button,
+#save-button {
+    margin: 1rem auto;
+}

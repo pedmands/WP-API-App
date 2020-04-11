@@ -1,4 +1,4 @@
 uploads/
-plugins/
-!plugins/restfields.php
-!plugins//restedit/
+plugins/*
+!plugins/restfields.php!plugins/restfields.php
+!plugins/restedit/

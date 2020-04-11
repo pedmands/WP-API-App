@@ -219,7 +219,9 @@ add_action( 'after_setup_theme', 'twentynineteen_content_width', 0 );
  * Enqueue scripts and styles.
  */
 function twentynineteen_scripts() {
-	wp_register_script('podcast-js', get_theme_file_uri('js/podcast.js'), array(), '1.0.0', true );
+	wp_enqueue_script("jquery");
+
+	wp_register_script('podcast-js', get_theme_file_uri('js/podcast.js'), array('jquery'), '1.0.3', true );
 	wp_enqueue_script('podcast-js');
 	wp_script_add_data( 'podcast-js', 'defer', true );
 	wp_script_add_data( 'podcast-js', 'type', 'module');

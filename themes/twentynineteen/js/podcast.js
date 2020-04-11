@@ -1,4 +1,5 @@
-/**
+jQuery(function($){
+	/**
  * Request the previous post (when available) using the REST API.
  * Trigger auto-load on scroll with click as fallback.
  */
@@ -118,15 +119,16 @@ function buildNewPost( postObject ) {
 	`;
 
 	// Remove "load previous" container.
-	document.querySelector('.js-loader').remove();
+	$('.js-loader').fadeOut();
 
 	// Create a article with appropriate classes to populate.
   let postElement = document.createElement( 'article' );
-	postElement.className = 'post type-post format-standard hentry';
+	postElement.className = 'post type-post format-standard hentry new-podcast';
 	postElement.innerHTML = output;
 	
 	// Append new article with all content to the bottom of the main element.
-	document.querySelector( '.pagination-single-inner').append(postElement);
+	$('.pagination-single-inner').append(postElement);
+	$('.new-podcast').fadeIn();
 
 	GetPodcast();
 }
@@ -147,3 +149,5 @@ const GetPodcast = () => {
 }
 
 GetPodcast();
+
+});

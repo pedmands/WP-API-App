@@ -219,6 +219,18 @@ add_action( 'after_setup_theme', 'twentynineteen_content_width', 0 );
  * Enqueue scripts and styles.
  */
 function twentynineteen_scripts() {
+	wp_register_script('podcast-js', get_theme_file_uri('js/podcast.js'), array(), '1.0.0', true );
+	wp_enqueue_script('podcast-js');
+	wp_script_add_data( 'podcast-js', 'defer', true );
+	wp_script_add_data( 'podcast-js', 'type', 'module');
+	
+	wp_localize_script( 'podcast-js', 'postdata',
+            array(
+                'theme_uri' => get_stylesheet_directory_uri(),
+                'rest_url' => rest_url('wp/v2/'),
+            )
+        );
+
 	wp_enqueue_style( 'twentynineteen-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 
 	wp_style_add_data( 'twentynineteen-style', 'rtl', 'replace' );
@@ -233,6 +245,7 @@ function twentynineteen_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
 }
 add_action( 'wp_enqueue_scripts', 'twentynineteen_scripts' );
 

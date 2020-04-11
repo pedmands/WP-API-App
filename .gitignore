@@ -1,1 +1,3 @@
 uploads/
+plugins/
+!plguins/restfields.php

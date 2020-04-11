@@ -49,6 +49,27 @@ function RDP_add_new_fields() {
             'get_callback' => 'RDP_get_prev_post_link'
         )
         );
+    register_rest_field(
+        'post',
+        'relatedPodcastID',
+        array(
+            'get_callback' => 'RDP_get_related_podcastID'
+        )
+        );
+    register_rest_field(
+        'post',
+        'relatedPodcastTitle',
+        array(
+            'get_callback' => 'RDP_get_related_podcast_title'
+        )
+        );
+    register_rest_field(
+        'post',
+        'relatedPodcastLink',
+        array(
+            'get_callback' => 'RDP_get_related_podcast_link'
+        )
+        );
 }
 
 /**
@@ -85,4 +106,53 @@ function RDP_get_prev_post_link() {
     $previousPost = get_previous_post();
 
     return get_permalink($previousPost->ID);
+}
+
+function RDP_get_related_podcastID() {
+    $ids = get_field('podcast', false, false);
+
+    $query = new WP_Query(array(
+        'post_type'      	=> 'podcast',
+        'posts_per_page'	=> 1,
+        'post__in'			=> $ids,
+        'post_status'		=> 'any',
+        'orderby'        	=> 'post__in',
+    ));
+
+    return $query->post->ID;
+
+    $query->reset_postdata();
+
+}
+
+function RDP_get_related_podcast_title() {
+    $ids = get_field('podcast', false, false);
+
+    $query = new WP_Query(array(
+        'post_type'      	=> 'podcast',
+        'posts_per_page'	=> 1,
+        'post__in'			=> $ids,
+        'post_status'		=> 'any',
+        'orderby'        	=> 'post__in',
+    ));
+
+    return $query->post->post_title;
+
+    $query->reset_postdata();
+}
+
+function RDP_get_related_podcast_link() {
+    $ids = get_field('podcast', false, false);
+
+    $query = new WP_Query(array(
+        'post_type'      	=> 'podcast',
+        'posts_per_page'	=> 1,
+        'post__in'			=> $ids,
+        'post_status'		=> 'any',
+        'orderby'        	=> 'post__in',
+    ));
+
+    return get_permalink($query->post->ID);
+
+    $query->reset_postdata();
 }

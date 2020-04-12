@@ -118,7 +118,7 @@ function buildNewPost( postObject ) {
     </div>
 	`;
 
-	// Remove "load previous" container.
+	// Remove "load podcast" container.
 	$('.js-loader').fadeOut();
 
 	// Create a article with appropriate classes to populate.
@@ -133,7 +133,7 @@ function buildNewPost( postObject ) {
 	GetPodcast();
 }
 
-// Get previous post
+// Get related podcast
 const GetPodcast = () => {
 	let podcastTrigger = document.querySelector('.load-podcast a');
 	

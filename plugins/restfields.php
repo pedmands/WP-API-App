@@ -109,50 +109,61 @@ function RDP_get_prev_post_link() {
 }
 
 function RDP_get_related_podcastID() {
-    $ids = get_field('podcast', false, false);
+    $id = get_field("podcast");
 
-    $query = new WP_Query(array(
-        'post_type'      	=> 'podcast',
-        'posts_per_page'	=> 1,
-        'post__in'			=> $ids,
-        'post_status'		=> 'any',
-        'orderby'        	=> 'post__in',
-    ));
-
-    return $query->post->ID;
+    if ($id) {
+        $query = new WP_Query(array(
+            'post_type'      	=> 'podcast',
+            'posts_per_page'	=> 1,
+            'post__in'			=> $id,
+            'post_status'		=> 'any',
+            'orderby'        	=> 'post__in',
+        ));
+        return $query->post->ID;
+    } else {
+        return "None";
+    }    
 
     $query->reset_postdata();
 
 }
 
 function RDP_get_related_podcast_title() {
-    $ids = get_field('podcast', false, false);
+    $id = get_field("podcast");
 
-    $query = new WP_Query(array(
-        'post_type'      	=> 'podcast',
-        'posts_per_page'	=> 1,
-        'post__in'			=> $ids,
-        'post_status'		=> 'any',
-        'orderby'        	=> 'post__in',
-    ));
-
-    return $query->post->post_title;
-
+    if ($id) {
+        $query = new WP_Query(array(
+            'post_type'      	=> 'podcast',
+            'posts_per_page'	=> 1,
+            'post__in'			=> $id,
+            'post_status'		=> 'any',
+            'orderby'        	=> 'post__in',
+        ));
+    
+        return $query->post->post_title;
+    } else {
+        return "None";
+    }
+    
     $query->reset_postdata();
 }
 
 function RDP_get_related_podcast_link() {
-    $ids = get_field('podcast', false, false);
+    $id = get_field("podcast");
 
-    $query = new WP_Query(array(
-        'post_type'      	=> 'podcast',
-        'posts_per_page'	=> 1,
-        'post__in'			=> $ids,
-        'post_status'		=> 'any',
-        'orderby'        	=> 'post__in',
-    ));
-
-    return get_permalink($query->post->ID);
+    if ($id) {
+        $query = new WP_Query(array(
+            'post_type'      	=> 'podcast',
+            'posts_per_page'	=> 1,
+            'post__in'			=> $id,
+            'post_status'		=> 'any',
+            'orderby'        	=> 'post__in',
+        ));
+    
+        return get_permalink($query->post->ID);
+    } else {
+        return "None";
+    }
 
     $query->reset_postdata();
 }

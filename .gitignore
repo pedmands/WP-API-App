@@ -4,3 +4,4 @@ plugins/*
 !plugins/restedit/
 themes/*
 !/themes/twentynineteen/
+!/themes/relatedChild/
